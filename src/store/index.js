@@ -24,30 +24,42 @@ export const store = createStore({
   },
   actions: {
     async getRepositories({ commit }) {
-      const response = await request(repositories)
-      commit(
-        'setRepositories',
-        response.data.data.repositoryOwner.repositories.nodes
-      )
+      try {
+        const response = await request(repositories)
+        commit(
+          'setRepositories',
+          response.data.data.repositoryOwner.repositories.nodes
+        )
+      } catch (error) {
+        console.log(error)
+      }
     },
     async getIssues({ commit }, name) {
-      this.state.loading = true
-      const response = await request(issues(name))
-      commit('setIssues', response.data.data.repository.issues.nodes)
-      this.state.loading = false
+      try {
+        this.state.loading = true
+        const response = await request(issues(name))
+        commit('setIssues', response.data.data.repository.issues.nodes)
+        this.state.loading = false
+      } catch (error) {
+        console.log(error)
+      }
     },
 
     async getComments({ commit }, name) {
-      this.state.loading = true
-      const response = await request(comments(name))
-      if (response.data.data.repository.issue !== null) {
-        commit(
-          'setComments',
-          response.data.data.repository.issue.comments.nodes
-        )
-      }
+      try {
+        this.state.loading = true
+        const response = await request(comments(name))
+        if (response.data.data.repository.issue !== null) {
+          commit(
+            'setComments',
+            response.data.data.repository.issue.comments.nodes
+          )
+        }
 
-      this.state.loading = false
+        this.state.loading = false
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
 
