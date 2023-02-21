@@ -9,10 +9,9 @@ const issues = computed(() => store.getters.getIssues)
 const loading = computed(() => store.state.loading)
 
 onMounted(() => {
-  if (!issues.value.length) {
-    store.dispatch('getRepositories')
-  }
-
+  // if (!issues.value.length) {
+  // store.dispatch('getRepositories')
+  // }
   // store.dispatch('getIssues', repoItem.value)
 })
 </script>

@@ -14,7 +14,7 @@ export const store = createStore({
       state.repositories = data
     },
     setIssues(state, data) {
-      state.issues = data
+      state.issues.push(data)
     },
     setComments(state, data) {
       state.comments = data
@@ -41,18 +41,20 @@ export const store = createStore({
         console.log(error)
       }
     },
-    async getIssues({ commit, getters }) {
+    getIssues({ commit, getters }) {
       try {
         this.state.loading = true
         const issuesAll = []
         for (let item of getters.getRepositories) {
-          const response = await request(issues(item.name))
-          issuesAll.push(response.data.data.repository)
+          const response = request(issues(item.name))
+          issuesAll.push(response)
         }
         Promise.all(issuesAll)
           .then(res => {
-            commit('setIssues', res)
-            this.state.loading = false
+            for (let el of res) {
+              commit('setIssues', el.data.data.repository)
+              this.state.loading = false
+            }
           })
           .catch(error => console.log(error))
       } catch (error) {
