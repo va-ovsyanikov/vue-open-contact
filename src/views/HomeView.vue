@@ -1,23 +1,26 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { onMounted, ref, computed } from 'vue'
 import { useStore } from 'vuex'
 const store = useStore()
 const active = ref('Hello-World')
 const isActive = ref(false)
 const router = useRouter()
+const route = useRoute()
 
 const repositories = computed(() => store.state.repositories)
 
 onMounted(() => {
   store.dispatch('getRepositories')
-  store.dispatch('getIssues', active.value)
-  router.push(active.value)
+  store.commit('selectRepository', active.value)
+  if (route.path === '/') {
+    router.push(active.value)
+  }
 })
 
 const selectRepo = item => {
   active.value = item
-  store.dispatch('getIssues', item)
+  store.commit('selectRepository', item)
 }
 </script>
 

@@ -2,10 +2,10 @@ export const repositories = `query {
 	repositoryOwner(login:"octocat") {
     login,
     repositories(last:8, ownerAffiliations:[OWNER], privacy:PUBLIC) {
-      totalCount
-      nodes {
-			name
-            }
+        totalCount
+        nodes {
+        name
+          }
         }
       }
     }`
@@ -13,6 +13,7 @@ export const repositories = `query {
 export const issues = name => {
   return `query {
     repository(owner:"octocat", name:"${name}") {
+      name
       issues(last:20, states:CLOSED) {
           nodes {
             title
@@ -30,13 +31,13 @@ export const comments = number => {
     repository(owner:"octocat", name:"Hello-World") {
       issue(number:${number}) {
         id
-      comments(first:20) {
+        comments(first:20) {
         nodes{
           bodyText
           createdAt
+          }
         }
       }
     }
-  }
   }`
 }

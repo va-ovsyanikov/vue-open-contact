@@ -12,7 +12,7 @@ const router = createRouter({
         {
           path: '/:repo',
           name: 'IssuesRepo',
-          component: () => import('../components/IssuesRepo.vue'),
+          component: () => import('../components/IssuesItem.vue'),
         },
         {
           path: '/:repo/:id',
