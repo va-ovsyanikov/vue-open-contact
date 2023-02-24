@@ -17,7 +17,7 @@ const router = createRouter({
         {
           path: '/:repo/:id',
           name: 'CommentsIssues',
-          component: () => import('../components/CommentsIssues.vue'),
+          component: () => import('../components/CommentsItem.vue'),
         },
       ],
     },

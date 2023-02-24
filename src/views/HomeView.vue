@@ -11,7 +11,7 @@ const route = useRoute()
 const repositories = computed(() => store.state.repositories)
 
 onMounted(() => {
-  store.dispatch('getRepositories')
+  store.dispatch('fetchRepositories')
   store.commit('selectRepository', active.value)
   if (route.path === '/') {
     router.push(active.value)

@@ -1,6 +1,6 @@
 import axios from 'axios'
 const endpoint = 'https://api.github.com/graphql'
-const token = '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'
+const token = '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'
 
 const headers = {
   'content-type': 'application/json',

@@ -27,7 +27,7 @@ export const store = createStore({
     },
   },
   actions: {
-    async getRepositories({ commit, dispatch }) {
+    async fetchRepositories({ commit, dispatch }) {
       try {
         const response = await request(repositories)
         commit(
@@ -35,13 +35,13 @@ export const store = createStore({
           response.data.data.repositoryOwner.repositories.nodes
         )
         if (response) {
-          dispatch('getIssues')
+          dispatch('fetchIssues')
         }
       } catch (error) {
         console.log(error)
       }
     },
-    getIssues({ commit, getters }) {
+    fetchIssues({ commit, getters }) {
       try {
         this.state.loading = true
         const issuesAll = []
@@ -62,7 +62,7 @@ export const store = createStore({
       }
     },
 
-    async getComments({ commit }, name) {
+    async fetchComments({ commit }, name) {
       try {
         this.state.loading = true
         const response = await request(comments(name))

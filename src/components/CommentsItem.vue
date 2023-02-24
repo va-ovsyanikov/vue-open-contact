@@ -11,7 +11,7 @@ const comments = computed(() => store.state.comments)
 const loading = computed(() => store.state.loading)
 
 onMounted(() => {
-  store.dispatch('getComments', String(route.params.id))
+  store.dispatch('fetchComments', String(route.params.id))
 })
 </script>
 <template>
